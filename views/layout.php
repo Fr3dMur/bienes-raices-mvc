@@ -1,3 +1,15 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = $_SESSION['login'] ?? false;
+
+if (!isset($inicio)) {
+    $inicio = false;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,21 +37,22 @@
                 <div class="derecha">
 
                     <div class="dark-mode-boton ">
-                        <!-- <img src="/build/img/dark-mode.svg" alt="boton para dark-mode" class="dark-mode-boton luna">
-                    <img src="/build/img/Sun_mode.svg" alt="boton para dark mode" class="dark-mode-boton sun"> -->
+                        <img src="build/img/dark-mode.svg" alt="boton para dark-mode" class="dark-mode-boton luna">
+                        <img src="build/img/Sun_mode.svg" alt="boton para dark mode" class="dark-mode-boton sun">
                     </div>
 
 
                     <nav class="navegacion">
-                        <a href="../../nosotros.php">Nosotros</a>
-                        <a href="../../anuncios.php">Anuncios</a>
-                        <a href="../../blog.php">Blog</a>
-                        <a href="../../contacto.php">Contacto</a>
+                        <a href="/">Inicio</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/propiedades">Anuncios</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/contacto">Contacto</a>
                         <?php if ($auth) : ?>
                             <a href="admin/index.php">Administrador</a>
                             <a href="/cerrarSesion.php">Cerrar Sesion</a>
                         <?php else : ?>
-                            <a href="login.php">Iniciar Sesion</a>
+                            <a href="/login">Iniciar Sesion</a>
                         <?php endif ?>
                     </nav>
                 </div>
@@ -52,17 +65,17 @@
         </div>
     </header>
 
-    <?php $contenido ?>
+    <?php echo $contenido ?>
 
     <footer class="footer seccion">
 
         <div class="contenedor contenedor-footor">
 
             <nav class="navegacion">
-                <a href="../../nosotros.php">Nosotros</a>
-                <a href="../../anuncios.php">Anuncios</a>
-                <a href="../../blog.php">Blog</a>
-                <a href="../../contacto.php">Contacto</a>
+                <a href="/nosotros">Nosotros</a>
+                <a href="/anuncios">Anuncios</a>
+                <a href="/blog">Blog</a>
+                <a href="/contacto">Contacto</a>
             </nav>
 
         </div>
@@ -71,7 +84,7 @@
 
     </footer>
 
-    <script src="/build/js/bundle.min.js"></script>
+    <script src="build/js/bundle.min.js"></script>
 </body>
 
 </html>

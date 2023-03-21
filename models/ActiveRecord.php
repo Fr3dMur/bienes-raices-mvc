@@ -47,10 +47,10 @@ class ActiveRecord
       // debuggear($query);
       //Get result from Query
       $resultado = self::$db->query($query);
-
+      // debuggear($resultado);
       if ($resultado) {
          // REDIRECCIONAR A USUARIO
-         header('Location: /admin/index.php?resultado=1');
+         header('Location: /admin?resultado=1');
       }
    }
 
@@ -72,7 +72,7 @@ class ActiveRecord
 
       if ($resultado) {
          // REDIRECCIONAR A USUARIO
-         header('Location: /admin/index.php?resultado=2');
+         header('Location: /admin?resultado=2');
       }
    }
 
@@ -86,7 +86,7 @@ class ActiveRecord
       // Redireccionar
       if ($resultado) {
          $this->borrarImagen();
-         header('location: /admin/index.php?resultado=3');
+         header('Location: /admin?resultado=3');
       }
    }
 

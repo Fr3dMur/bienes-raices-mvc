@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 class Propiedad extends ActiveRecord
 {
    protected static $tabla = 'propiedades';
-   protected static $columnasDb = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedores_id'];
+   protected static $columnasDb = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
 
    public $id;
    public $titulo;
@@ -18,7 +18,7 @@ class Propiedad extends ActiveRecord
    public $wc;
    public $estacionamiento;
    public $creado;
-   public $vendedores_id;
+   public $vendedorId;
 
    public function __construct($args = [])
    {
@@ -31,7 +31,7 @@ class Propiedad extends ActiveRecord
       $this->wc = $args['wc'] ?? '';
       $this->estacionamiento = $args['estacionamiento'] ?? '';
       $this->creado = date('Y/m/d');
-      $this->vendedores_id = $args['vendedorId'] ?? '';
+      $this->vendedorId = $args['vendedorId'] ?? '';
    }
 
    public function validar()
@@ -61,7 +61,7 @@ class Propiedad extends ActiveRecord
          self::$errores[] = "Debes insertar los estacionamientos";
       };
 
-      if (!$this->vendedores_id) {
+      if (!$this->vendedorId) {
          self::$errores[] = "Debes elegir un vendedor";
       };
 

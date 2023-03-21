@@ -1,47 +1,53 @@
 <?php
 
-function incluirTemplate(string $nombre, bool $inicio = false){
+function incluirTemplate(string $nombre, bool $inicio = false)
+{
     include TEMPLATES_URL . "${nombre}.php";
 };
 
-define('TEMPLATES_URL', __DIR__.'/templates/');
-define('FUNCIONES_URL', __DIR__.'funciones.php');
-define('CARPETA_IMAGENES',__DIR__ . '/../imagenes/');
+define('TEMPLATES_URL', __DIR__ . '/templates/');
+define('FUNCIONES_URL', __DIR__ . 'funciones.php');
+define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
 
 
-function estaAutenticado() {
-       // El usuario esta autenticado
-       session_start();
+function estaAutenticado()
+{
+    // El usuario esta autenticado
+    session_start();
 
-       if(!$_SESSION['login']){
+    if (!$_SESSION['login']) {
         header('Location: /');
-       }
+    }
 }
 
-function debuggear($variable) {
+function debuggear($variable)
+{
     echo '<pre>';
     var_dump($variable);
     echo '</pre>';
-exit;
+    exit;
 }
 
 // Escapa / Sanitizar el HTML
-function s($html){
+function s($html)
+{
     $s = htmlspecialchars($html);
     return $s;
 }
 
 // Validar tipo de contenido 
-function validarTipoContenido($tipo){
-    $tipos = [ 'vendedor', 'propiedad'];
+function validarTipoContenido($tipo)
+{
+    $tipos = ['vendedor', 'propiedad'];
 
     return in_array($tipo, $tipos);
 }
 
 // Muestra mensaje condicional
-function mostrarNotificacion($codigo){
+function mostrarNotificacion($codigo)
+{
     $mensaje = '';
-    switch($codigo) {
+    switch ($codigo) {
         case 1:
             $mensaje = "Creado Correctamente";
             break;
@@ -56,4 +62,15 @@ function mostrarNotificacion($codigo){
             break;
     }
     return $mensaje;
+}
+
+function validarOrRedireccionar(string $url)
+{
+    // Validar que haya un ID valido
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+    if (!$id) {
+        header("Location: ${url}");
+    }
+    return $id;
 }
